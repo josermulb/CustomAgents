@@ -1,0 +1,18 @@
+[project]
+name = "customagents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "docstring-parser>=0.16",
+    "ollama>=0.5.1",
+    "psutil>=7.0.0",
+    "pydantic>=2.11.7",
+    "requests>=2.32.4",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+]
