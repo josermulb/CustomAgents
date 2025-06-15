@@ -26,6 +26,12 @@ Run the agent via terminal with:
 uv run main.py
 ```
 
+Run a chatbot via webapp with:
+
+```bash
+uv run streamlit run webapp.py
+```
+
 ---
 
 ## Project Structure
