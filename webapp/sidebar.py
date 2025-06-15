@@ -42,20 +42,25 @@ def render_sidebar(os_agent):
     """
     global _agent_stats_sidebar_placeholder
     with st.sidebar: # <--- Crucial: Ensure all sidebar content is here
-        # Using the generated logo URL
-        st.image("http://googleusercontent.com/image_generation_content/5", caption="Agentic Chatbot Logo")
-        st.title("Navigation")
-        st.write("---") # Visual separator
+        
+        _, col2, _ = st.columns([1, 6, 1])
+        with col2:
+            st.image(
+                "data\images\logo.jpg",
+                use_container_width =True
+                )
+            st.title("Navigation")
+            st.write("---") # Visual separator
 
-        # Navigation buttons with placeholders for future pages
-        if st.button("💬 Chatbot (Current)"):
-            st.session_state.current_page = "Chatbot"
-        if st.button("⚙️ Settings (Coming Soon)"):
-            st.session_state.current_page = "Settings"
-            st.info("Settings page is under construction!")
-        if st.button("❓ Help (Coming Soon)"):
-            st.session_state.current_page = "Help"
-            st.info("Help page is under construction!")
+            # Navigation buttons with placeholders for future pages
+            if st.button("💬 Chatbot"):
+                st.session_state.current_page = "Chatbot"
+            if st.button("⚙️ Settings (Coming Soon)"):
+                st.session_state.current_page = "Settings"
+                st.info("Settings page is under construction!")
+            if st.button("❓ Help (Coming Soon)"):
+                st.session_state.current_page = "Help"
+                st.info("Help page is under construction!")
 
         # Spacer div to push the agent stats to the bottom of the sidebar
         st.markdown("<div style='height: 30vh;'></div>", unsafe_allow_html=True)
@@ -65,7 +70,7 @@ def render_sidebar(os_agent):
 
         # Footer information for the sidebar
         st.markdown("---")
-        st.markdown("Developed by Your Team")
+        st.markdown("Developed by JARM")
 
     # Initial call to update stats when the app loads or reruns.
     # This call is outside `with st.sidebar:` but it updates a placeholder

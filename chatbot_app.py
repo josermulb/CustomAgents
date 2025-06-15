@@ -60,7 +60,7 @@ if "agent_stats" not in st.session_state:
 
 # --- COMPLETE LEFT SIDEBAR ---
 with st.sidebar:
-    st.image("https://via.placeholder.com/150", caption="Logo (Placeholder)") # You can put your logo here
+    st.image("data\images\logo.jpg", caption="Logo") # You can put your logo here
     st.title("Navigation")
     st.write("---") # Visual separator
 
@@ -83,7 +83,7 @@ with st.sidebar:
 
     # Footer information for the sidebar
     st.markdown("---")
-    st.markdown("Developed by José Ángel Rodríguez Murillo")
+    st.markdown("Developed by Your Team")
 
 
 # Function to update stats in the sidebar

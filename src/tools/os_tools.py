@@ -473,3 +473,44 @@ def show_message_box(text: str, title: str) -> bool:
     except subprocess.CalledProcessError as e:
         logger.error(f"Error showing message box: {e}")
         return False
+
+
+# ----------------------- 📊 GPU Management -----------------------
+
+def get_gpu_info_nvidia_smi() -> Optional[str]:
+    """
+    Retrieves GPU information using nvidia-smi command.
+    This function is intended for systems with NVIDIA GPUs and the nvidia-smi tool installed.
+
+    Returns:
+        Optional[str]: GPU information as a string, or None if an error occurs
+                       (e.g., nvidia-smi not found, no NVIDIA GPU).
+    """
+    try:
+        # Run the nvidia-smi command to get GPU status
+        # capture_output=True will capture stdout and stderr
+        # text=True decodes stdout/stderr as text
+        # check=True will raise CalledProcessError if the command returns a non-zero exit code
+        result = subprocess.run(
+            ['nvidia-smi'],
+            capture_output=True,
+            text=True,
+            check=True,
+            encoding='utf-8', # Specify encoding for output
+            errors='ignore'  # Ignore characters that cannot be decoded
+        )
+        logger.info("Successfully retrieved GPU information using nvidia-smi.")
+        return result.stdout.strip()
+    except FileNotFoundError:
+        logger.error("Error: 'nvidia-smi' command not found.")
+        logger.error("Please ensure NVIDIA drivers are installed and 'nvidia-smi' is in your system's PATH.")
+        return "Error: 'nvidia-smi' command not found. Please ensure NVIDIA drivers are installed and 'nvidia-smi' is in your system's PATH."
+    except subprocess.CalledProcessError as e:
+        logger.error(f"Error executing 'nvidia-smi': {e}")
+        logger.error(f"STDOUT: {e.stdout}")
+        logger.error(f"STDERR: {e.stderr}")
+        return f"Error executing 'nvidia-smi'. Check console logs for details. Output:\n{e.stdout}\nError:\n{e.stderr}"
+    except Exception as e:
+        logger.error(f"An unexpected error occurred while getting GPU info: {e}")
+        return f"An unexpected error occurred: {e}"
+
